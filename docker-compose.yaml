@@ -1,0 +1,23 @@
+services:
+  farm_backend_node:
+    image: deepakdashcode/todofarm-backend
+    container_name: farm_backend_node
+    ports:
+      - "8000:8000"
+    networks:
+      - my_network1
+    restart: unless-stopped
+
+  farm_frontend_node:
+    image: deepakdashcode/todofarm-frontend
+    container_name: farm_frontend_node
+    ports:
+      - "3000:3000"
+    networks:
+      - my_network1
+    depends_on:
+      - farm_backend_node
+
+networks:
+  my_network1:
+    driver: bridge
